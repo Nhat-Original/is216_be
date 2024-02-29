@@ -1,0 +1,20 @@
+{
+  "name": "spring",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.java": [
+      "mvn com.coveo:fmt-maven-plugin:format",
+      "git add ."
+    ]
+  },
+  "dependencies": {
+    "@commitlint/cli": "^19.0.3",
+    "@commitlint/config-conventional": "^19.0.3",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2"
+  }
+}
