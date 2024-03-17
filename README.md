@@ -21,6 +21,12 @@ mvn spring-boot:run
 
 use a browser to navigate to http://localhost:8080/swagger-ui/index.html
 
+## Run tests
+
+``` bash
+mvn test
+```
+
 ## Other commands
 
 ### Format code
