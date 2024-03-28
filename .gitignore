@@ -34,3 +34,6 @@ build/
 
 ### Node dependency ###
 node_modules/
+
+### environment ###
+/src/main/resources/env.properties
