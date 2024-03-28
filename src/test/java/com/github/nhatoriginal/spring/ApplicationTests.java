@@ -1,11 +1,11 @@
-package com.github.NhatOriginal.spring;
+package com.github.nhatoriginal.spring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class ApplicationTests {
-
   @Test
-  void contextLoads() {}
+  void contextLoads() {
+  }
 }

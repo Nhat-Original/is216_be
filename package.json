@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "prepare": "husky install",
-    "format": "mvn fmt:format"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@commitlint/cli": "^19.0.3",
