@@ -10,16 +10,30 @@ For building and running the application you need:
 
 ## Run the application locally
 
+Install the dependencies:
+
 ``` bash
 npm install
 npm run prepare
 ```
 
+Make sure to connect to your databse by defining the env file `env.properties` located in `/src/main/resources/`. For example:
+
+``` properties
+# /src/main/resources/env.properties
+DB_DDL_AUTO=update
+DB_URL=jdbc:postgresql://localhost:5432/postgres
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+Run the server:
+
 ``` bash
 mvn spring-boot:run
 ```
 
-use a browser to navigate to http://localhost:8080/swagger-ui/index.html
+Use a browser to navigate to [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html).
 
 ## Run tests
 
