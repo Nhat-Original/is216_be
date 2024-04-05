@@ -1,4 +1,4 @@
-package com.github.nhatoriginal.spring.modules.task;
+package com.github.nhatoriginal.spring.doc.example;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

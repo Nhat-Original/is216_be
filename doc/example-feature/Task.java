@@ -1,4 +1,4 @@
-package com.github.nhatoriginal.spring.modules.task;
+package com.github.nhatoriginal.spring.doc.example;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

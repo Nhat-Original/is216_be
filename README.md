@@ -91,5 +91,6 @@ Common types according to [commitlint-config-conventional (based on the Angular 
 
 Read these references if needed:
 
-- Open api swagger: https://springdoc.org/
-- Lombok: https://codippa.com/lombok/
+- [Open api swagger](https://springdoc.org/)
+- [Lombok](https://codippa.com/lombok/)
+- [JPA/Hibernate entity relationships](https://www.baeldung.com/jpa-hibernate-associations)
