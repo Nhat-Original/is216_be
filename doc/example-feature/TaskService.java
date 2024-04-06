@@ -1,4 +1,4 @@
-package com.github.nhatoriginal.spring.modules.task;
+package com.github.nhatoriginal.spring.doc.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

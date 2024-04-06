@@ -1,4 +1,4 @@
-package com.github.nhatoriginal.spring.modules.task.dto;
+package com.github.nhatoriginal.spring.doc.example;
 
 import lombok.Data;
 
