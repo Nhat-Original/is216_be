@@ -48,8 +48,36 @@ mvn test
 ``` bash
 mvn fmt:format
 ```
+## How to name a branch?
+ 
+Branch name pattern:
 
-## How to name commit message? 
+
+```text
+type/description-in-kebab-case
+
+type/issue-#{issue_number}
+
+```
+
+Examples:
+
+```text
+feature/issue-#99
+```
+
+```text
+hotfix/quick-fix-for-an-emergency
+```
+
+Common types according to [simplified convention for naming branches](https://dev.to/varbsan/a-simplified-convention-for-naming-branches-and-commits-in-git-il4)
+- feature: adding, refactoring or removing a feature
+- bugfix: fixing a bug
+- hotfix: changing code with a temporary solution and/or without following the usual process (usually because of an emergency)
+- test: experimenting outside of an issue/ticket
+
+
+## How to name a commit message? 
 
 **Commitlint** checks if your commit messages meet the [conventional commit format](https://conventionalcommits.org).
 
@@ -94,3 +122,4 @@ Read these references if needed:
 - [Open api swagger](https://springdoc.org/)
 - [Lombok](https://codippa.com/lombok/)
 - [JPA/Hibernate entity relationships](https://www.baeldung.com/jpa-hibernate-associations)
+- [Hibernate type mappings](https://vladmihalcea.com/a-beginners-guide-to-hibernate-types/)
