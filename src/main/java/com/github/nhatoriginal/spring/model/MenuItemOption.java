@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "menu_item_option")
+@Table(name = "menu_item_options")
 public class MenuItemOption {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)

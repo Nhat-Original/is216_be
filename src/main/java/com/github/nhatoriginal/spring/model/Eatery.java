@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "eatery")
+@Table(name = "eateries")
 public class Eatery {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)

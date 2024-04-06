@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -56,7 +56,7 @@ public class User {
   private String phone;
 
   @ManyToMany
-  @JoinTable(name = "user_address", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "address_id"))
+  @JoinTable(name = "user_addresses", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "address_id"))
   private List<Address> addresses;
 
   @OneToOne(mappedBy = "owner")

@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "menu")
+@Table(name = "menus")
 public class Menu {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
