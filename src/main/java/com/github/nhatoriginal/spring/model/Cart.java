@@ -2,6 +2,7 @@ package com.github.nhatoriginal.spring.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
@@ -14,10 +15,12 @@ public class Cart {
   @Column(name = "quantity", nullable = false)
   private int quantity;
 
+  @Id
   @ManyToOne
   @JoinColumn(name = "user_id", nullable = false)
   private User user;
 
+  @Id
   @ManyToOne
   @JoinColumn(name = "menu_item_option_id", nullable = false)
   private MenuItemOption menuItemOption;
