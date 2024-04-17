@@ -7,6 +7,11 @@ public final class Endpoint {
     public static final String REGISTER = "/register";
     public static final String LOGOUT = "/logout";
     public static final String HELLO = "/hello";
+  }
 
+  public static final class MenuItem {
+    public static final String BASE = "/menu-item";
+    public static final String GET_ALL = "";
+    public static final String GET_BY_ID = "{id}";
   }
 }

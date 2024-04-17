@@ -1,4 +1,4 @@
-package com.github.nhatoriginal.spring.dto;
+package com.github.nhatoriginal.spring.dto.auth;
 
 import com.github.nhatoriginal.spring.model.Gender;
 import jakarta.persistence.EnumType;
@@ -11,21 +11,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+
 @Data
 @Setter
 @Getter
 public class AuthRegisterDto {
-    @Email
-    private String email;
-    @NotEmpty
-    private String password;
-    private String fullName;
+  @Email
+  private String email;
+  @NotEmpty
+  private String password;
+  private String fullName;
 
-    @NotEmpty
-    private LocalDate dateOfBirth;
+  @NotEmpty
+  private LocalDate dateOfBirth;
 
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
+  @Enumerated(EnumType.STRING)
+  private Gender gender;
 
-    private String phone;
+  private String phone;
 }
