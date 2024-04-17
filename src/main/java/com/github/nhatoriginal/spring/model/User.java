@@ -18,14 +18,15 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
+
 @Table(name = "users")
 public class User {
   @Id
@@ -74,7 +75,4 @@ public class User {
   private List<Cart> carts;
 
 
-  public User() {
-
-  }
 }
