@@ -72,9 +72,4 @@ public class User {
 
   @OneToMany(mappedBy = "user")
   private List<Cart> carts;
-
-
-  public User() {
-
-  }
 }
