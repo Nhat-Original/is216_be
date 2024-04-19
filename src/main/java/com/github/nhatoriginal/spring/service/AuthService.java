@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import com.github.nhatoriginal.spring.config.SecurityConfig.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
