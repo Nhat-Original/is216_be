@@ -33,7 +33,7 @@ Run the server:
 mvn spring-boot:run
 ```
 
-Use a browser to navigate to [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html).
+Use a browser to navigate to [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/api/v1/swagger-ui/index.html).
 
 ## Run tests
 
