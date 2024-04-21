@@ -12,7 +12,7 @@ import com.github.nhatoriginal.spring.constant.Endpoint;
 @RequestMapping
 public class BaseController {
   @GetMapping(Endpoint.BASE)
-  @PreAuthorize("hasAuthority(ROLE_CUSTOMER) || hasAuthority(ROLE_ADMIN) || hasAuthority(ROLE_OWNER)")
+  @PreAuthorize("hasAuthority('ROLE_CUSTOMER') || hasAuthority('ROLE_ADMIN') || hasAuthority('ROLE_OWNER')")
   public ResponseEntity<String> hello() {
     return ResponseEntity.ok("Hello");
   }
