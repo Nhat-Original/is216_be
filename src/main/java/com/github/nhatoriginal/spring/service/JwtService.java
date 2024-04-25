@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import com.github.nhatoriginal.spring.repository.UserRepository;
@@ -32,7 +30,8 @@ public class JwtService {
     }
 
     public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+        String id = extractClaim(token, Claims::getSubject);
+        return Objects.requireNonNull(userRepository.findById(UUID.fromString(id)).orElse(null)).getEmail();
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
