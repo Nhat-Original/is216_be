@@ -33,9 +33,5 @@ public class AuthController {
     ) {
         return ResponseEntity.ok(service.login(authLoginDto));
     }
-    @GetMapping(Endpoint.Auth.HELLO)
-    @PreAuthorize("hasRole('CUSTOMER')")
-    public ResponseEntity<String> hello() {
-        return ResponseEntity.ok("Hello");
-    }
+
 }

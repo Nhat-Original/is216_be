@@ -16,6 +16,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+
 @Service
 public class JwtService {
     @Value("${JWT_SECRET}")
@@ -33,7 +35,10 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        Map<String, Object> claims = new HashMap<>();
+        String roles = userDetails.getAuthorities().stream().map(Object::toString).collect(Collectors.joining(","));
+        claims.put("role", roles);
+        return generateToken(claims, userDetails);
     }
 
     public String generateToken(
