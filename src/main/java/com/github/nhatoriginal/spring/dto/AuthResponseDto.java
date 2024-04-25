@@ -10,3 +10,4 @@ public class AuthResponseDto {
     @JsonProperty("access_token")
     private String accessToken;
 }
+    

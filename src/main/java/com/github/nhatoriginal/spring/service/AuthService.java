@@ -10,7 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import com.github.nhatoriginal.spring.config.SecurityConfig.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +31,7 @@ public class AuthService {
     }
 
   public String register(AuthRegisterDto authRegisterDto) {
+        System.out.println(authRegisterDto);
     if (userRepository.findByEmail(authRegisterDto.getEmail()) != null) {
         throw new IllegalArgumentException("Email already in use");
     }

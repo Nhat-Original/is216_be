@@ -27,9 +27,17 @@ public class AuthController {
     return ResponseEntity.ok(service.register(request));
   }
 
-  @PostMapping(Endpoint.Auth.LOGIN)
-  public ResponseEntity<AuthResponseDto> login(
-      @Validated @RequestBody AuthLoginDto authLoginDto) {
-    return ResponseEntity.ok(service.login(authLoginDto));
-  }
+
+    @PostMapping(Endpoint.Auth.REGISTER)
+    public ResponseEntity<String> register(
+           @Validated  @RequestBody AuthRegisterDto request
+            ) {
+        return ResponseEntity.ok(service.register(request));
+    }
+    @PostMapping(Endpoint.Auth.LOGIN)
+    public ResponseEntity<AuthResponseDto> login(
+           @Validated  @RequestBody AuthLoginDto authLoginDto
+    ) {
+        return ResponseEntity.ok(service.login(authLoginDto));
+    }
 }
