@@ -1,5 +1,6 @@
 package com.github.nhatoriginal.spring.service;
 
+import com.github.nhatoriginal.spring.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -17,14 +18,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
+import com.github.nhatoriginal.spring.repository.UserRepository;
 @Service
 public class JwtService {
     @Value("${JWT_SECRET}")
     private String secretKey;
-
     @Value("${JWT_EXPIRATION}")
     private long jwtExpiration;
+    private final UserRepository userRepository;
+
+    public JwtService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
@@ -52,8 +58,9 @@ public class JwtService {
             UserDetails userDetails,
             long expiration
     ) {
+        User user = userRepository.findByEmail(userDetails.getUsername());
        return Jwts.builder().claims(extraClaims)
-                .subject(userDetails.getUsername()).
+                .subject(String.valueOf(user.getId())).
                 issuedAt(new Date(System.currentTimeMillis())).expiration(new Date(expiration * 1000 + System.currentTimeMillis())).signWith(getSignInKey()).compact();
 
     }

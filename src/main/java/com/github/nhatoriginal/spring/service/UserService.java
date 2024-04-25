@@ -27,6 +27,9 @@ public class UserService implements UserDetailsService {
         }
         return new CustomUserDetails(user);
     }
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 
 
 }
