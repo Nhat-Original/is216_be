@@ -15,4 +15,8 @@ public final class Endpoint {
     public static final String GET_ALL = "";
     public static final String GET_ONE = "/{id}";
   }
+  public static final class User {
+    public static final String BASE = "/user";
+
+  }
 }

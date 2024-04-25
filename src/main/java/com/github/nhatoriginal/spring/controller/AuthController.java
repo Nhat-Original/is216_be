@@ -21,11 +21,6 @@ public class AuthController {
     this.service = service;
   }
 
-  @PostMapping(Endpoint.Auth.REGISTER)
-  public ResponseEntity<String> register(
-      @RequestBody @Valid AuthRegisterDto request) {
-    return ResponseEntity.ok(service.register(request));
-  }
 
 
     @PostMapping(Endpoint.Auth.REGISTER)
