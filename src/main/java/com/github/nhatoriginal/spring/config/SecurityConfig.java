@@ -41,10 +41,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationProvider authenticationProvider) throws Exception {
         return  http
-                .csrf(AbstractHttpConfigurer::disable)
                 .cors(corsConfigurationSource())
-                .httpBasic(AbstractHttpConfigurer::disable)
-                .formLogin(AbstractHttpConfigurer::disable)
                 .securityMatcher("/api/**")
                 .authorizeHttpRequests(req ->
                         req.requestMatchers("/api/v1/auth/**")
