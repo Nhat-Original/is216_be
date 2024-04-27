@@ -1,4 +1,4 @@
-package com.github.nhatoriginal.spring.dto;
+package com.github.nhatoriginal.spring.dto.auth;
 
 import com.github.nhatoriginal.spring.model.Gender;
 import jakarta.persistence.EnumType;
