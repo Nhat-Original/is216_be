@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class requestController {
-    @GetMapping("/hello")
-    @PreAuthorize("hasAuthority('ROLE_CUSTOMER')")
-    public ResponseEntity<String> hello() {
-        return ResponseEntity.ok("Hello");
-    }
+public class RequestController {
+  @GetMapping("/hello")
+  @PreAuthorize("hasAuthority('ROLE_CUSTOMER')")
+  public ResponseEntity<String> hello() {
+    return ResponseEntity.ok("Hello");
+  }
 }

@@ -1,4 +1,4 @@
-package com.github.nhatoriginal.spring.dto;
+package com.github.nhatoriginal.spring.dto.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -10,8 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AuthLoginDto {
-    @Email
-    private String email;
-    @NotBlank
-    private String password;
+  @Email
+  private String email;
+  @NotBlank
+  private String password;
 }
