@@ -6,11 +6,14 @@ import com.github.nhatoriginal.spring.dto.auth.AuthResponseDto;
 import com.github.nhatoriginal.spring.model.Role;
 import com.github.nhatoriginal.spring.model.User;
 import com.github.nhatoriginal.spring.repository.UserRepository;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class AuthService {
@@ -33,7 +36,7 @@ public class AuthService {
   public String register(AuthRegisterDto authRegisterDto) {
     System.out.println(authRegisterDto);
     if (userRepository.findByEmail(authRegisterDto.getEmail()) != null) {
-      throw new IllegalArgumentException("Email already in use");
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
     }
 
     User user = User.builder()
