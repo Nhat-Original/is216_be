@@ -9,7 +9,7 @@ public class TaskService {
   @Autowired
   private TaskRepository taskRepository;
 
-  public Iterable<Task> getTaskList() {
+  public List<Task> getTaskList() {
     return taskRepository.findAll();
   }
 

@@ -14,7 +14,7 @@ public class TaskController {
   private TaskService taskService;
 
   @GetMapping
-  public Iterable<Task> getTaskList() {
+  public List<Task> getTaskList() {
     return taskService.getTaskList();
   }
 
