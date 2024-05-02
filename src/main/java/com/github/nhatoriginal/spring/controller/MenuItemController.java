@@ -1,5 +1,6 @@
 package com.github.nhatoriginal.spring.controller;
 
+import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ public class MenuItemController {
   private MenuItemService menuItemService;
 
   @GetMapping(Endpoint.MenuItem.GET_ALL)
-  public Iterable<MenuItem> getMenuItemList() {
+  public List<MenuItem> getMenuItemList() {
     return menuItemService.getMenuItemList();
   }
 
