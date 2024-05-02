@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.github.nhatoriginal.spring.constant.Endpoint;
-import com.github.nhatoriginal.spring.model.MenuItem;
+import com.github.nhatoriginal.spring.dto.menuItem.MenuItemDetailDto;
+import com.github.nhatoriginal.spring.dto.menuItem.MenuItemDto;
 import com.github.nhatoriginal.spring.service.MenuItemService;
 
 @RestController
@@ -18,12 +19,12 @@ public class MenuItemController {
   private MenuItemService menuItemService;
 
   @GetMapping(Endpoint.MenuItem.GET_ALL)
-  public List<MenuItem> getMenuItemList() {
-    return menuItemService.getMenuItemList();
+  public List<MenuItemDto> findAll() {
+    return menuItemService.findAll();
   }
 
   @GetMapping(Endpoint.MenuItem.GET_ONE)
-  public MenuItem getMenuItemById(@PathVariable UUID id) {
-    return menuItemService.getMenuItemById(id);
+  public MenuItemDetailDto findById(@PathVariable UUID id) {
+    return menuItemService.findById(id);
   }
 }
