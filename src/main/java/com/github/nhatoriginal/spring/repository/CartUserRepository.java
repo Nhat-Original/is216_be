@@ -1,5 +1,6 @@
 package com.github.nhatoriginal.spring.repository;
 
+import com.github.nhatoriginal.spring.config.CartIdClassConfig;
 import com.github.nhatoriginal.spring.model.Cart;
 import com.github.nhatoriginal.spring.model.MenuItemOption;
 import com.github.nhatoriginal.spring.model.User;
@@ -10,6 +11,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface CartUserRepository extends JpaRepository<Cart, MenuItemOption> {
+public interface CartUserRepository extends JpaRepository<Cart, CartIdClassConfig> {
     List<Cart> findByUser(User user);
 }

@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(Endpoint.Payment.BASE)
 public class PaymentController {
 
     @Autowired
