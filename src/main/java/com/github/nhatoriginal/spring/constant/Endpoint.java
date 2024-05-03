@@ -21,4 +21,15 @@ public final class Endpoint {
     public static final String GET_ONE = "/{id}";
 
   }
+
+  public static final class Cart {
+    public static final String BASE  = "/cart" ;
+    public static final String GET_ALL = "/user/{id}";
+    public static final String DELETE = "/user/{id}";
+  }
+
+  public static final class Payment {
+    public static final String BASE = "/payment/user/{id}";
+  }
+
 }
