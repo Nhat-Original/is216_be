@@ -10,7 +10,9 @@ import com.github.nhatoriginal.spring.repository.CartUserRepository;
 import com.github.nhatoriginal.spring.repository.MenuItemOptionRepository;
 import com.github.nhatoriginal.spring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -41,10 +43,10 @@ public class CartService {
 
   public Cart save(SaveCartItemDto saveCartItemDto) {
     User user = userRepository.findById(saveCartItemDto.getUserId())
-        .orElseThrow(() -> new RuntimeException("User not found"));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
     MenuItemOption menuItemOption = menuItemOptionRepository.findById(saveCartItemDto.getMenuItemOptionId())
-        .orElseThrow(() -> new RuntimeException("Menu item option not found"));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Menu item option not found"));
 
     Cart cart = new Cart();
     cart.setUser(user);

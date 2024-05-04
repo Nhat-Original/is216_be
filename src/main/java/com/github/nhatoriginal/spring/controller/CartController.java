@@ -8,6 +8,7 @@ import com.github.nhatoriginal.spring.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -24,10 +25,14 @@ public class CartController {
   }
 
   @PostMapping(Endpoint.Cart.CREATE)
-  public ResponseEntity<Cart> save(@RequestBody SaveCartItemDto saveCartItemDto) {
-    Cart cart = cartService.save(saveCartItemDto);
+  public ResponseEntity<String> save(@Validated @RequestBody SaveCartItemDto saveCartItemDto) {
+    Cart cartItem = cartService.save(saveCartItemDto);
 
-    return new ResponseEntity<>(cart, HttpStatus.CREATED);
+    if (cartItem == null) {
+      return new ResponseEntity<>("Failed to save cart item", HttpStatus.BAD_REQUEST);
+    }
+
+    return new ResponseEntity<>("Saved cart item successfully", HttpStatus.CREATED);
   }
 
   // @DeleteMapping(Endpoint.Cart.DELETE)

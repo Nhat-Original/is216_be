@@ -30,6 +30,11 @@ public final class Endpoint {
     public static final String DELETE = "/user/{id}";
   }
 
+  public static final class Review {
+    public static final String BASE = "/review";
+    public static final String CREATE = "";
+  }
+
   public static final class Payment {
     public static final String BASE = "/payment/user/{id}";
   }
