@@ -38,7 +38,7 @@ public class Order {
   private String note;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "payment_status", nullable = false)
+  @Column(name = "payment_method", nullable = false)
   private PaymentMethod paymentMethod;
 
   @Enumerated(EnumType.STRING)
@@ -61,6 +61,6 @@ public class Order {
   private Address address;
 
   @ManyToOne
-  @JoinColumn(name = "shipper", nullable = false)
+  @JoinColumn(name = "shipper_id", nullable = false)
   private Shipper shipper;
 }
