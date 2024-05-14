@@ -18,8 +18,14 @@ public class MenuItemService {
   @Autowired
   private MenuItemRepository menuItemRepository;
 
-  public List<MenuItemDto> findAll() {
-    List<MenuItem> menuItems = menuItemRepository.findAll();
+  public List<MenuItemDto> findAll(String name) {
+    List<MenuItem> menuItems;
+
+    if (name.isEmpty()) {
+      menuItems = menuItemRepository.findAll();
+    } else {
+      menuItems = menuItemRepository.findByNameContaining(name);
+    }
 
     return menuItems.stream().map(
         menuItem -> new MenuItemDto(menuItem.getId(), menuItem.getName(), menuItem.getImageUrl())).toList();
