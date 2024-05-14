@@ -12,10 +12,18 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class OrderDto {
-  public UUID id;
-  public LocalDate orderDate;
-  public long totalPrice;
-  public String note;
-  public PaymentMethod paymentMethod;
-  public DeliveryStatus deliveryStatus;
+  private UUID id;
+  private LocalDate orderDate;
+  private long totalPrice;
+  private String note;
+  private PaymentMethod paymentMethod;
+  private DeliveryStatus deliveryStatus;
+  private Eatery eatery;
+
+  @Data
+  @AllArgsConstructor
+  public static class Eatery {
+    private UUID id;
+    private String name;
+  }
 }

@@ -26,7 +26,8 @@ public class OrderService {
 
     return orderRepository.findByUserId(userId).stream().map(
         order -> new OrderDto(order.getId(), order.getOrderDate(), order.getTotalPrice(), order.getNote(),
-            order.getPaymentMethod(), order.getDeliveryStatus()))
+            order.getPaymentMethod(), order.getDeliveryStatus(),
+            new OrderDto.Eatery(order.getEatery().getId(), order.getEatery().getName())))
         .toList();
   }
 }
