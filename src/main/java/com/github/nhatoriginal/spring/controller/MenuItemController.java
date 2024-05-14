@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.github.nhatoriginal.spring.constant.Endpoint;
 import com.github.nhatoriginal.spring.dto.menuItem.MenuItemDetailDto;
@@ -19,8 +20,8 @@ public class MenuItemController {
   private MenuItemService menuItemService;
 
   @GetMapping(Endpoint.MenuItem.GET_ALL)
-  public List<MenuItemDto> findAll() {
-    return menuItemService.findAll();
+  public List<MenuItemDto> findAll(@RequestParam("name") String name) {
+    return menuItemService.findAll(name);
   }
 
   @GetMapping(Endpoint.MenuItem.GET_ONE)
