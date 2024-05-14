@@ -22,7 +22,7 @@ public class MenuItemService {
     List<MenuItem> menuItems = menuItemRepository.findAll();
 
     return menuItems.stream().map(
-        menuItem -> new MenuItemDto(menuItem.getId().toString(), menuItem.getName(), menuItem.getImageUrl())).toList();
+        menuItem -> new MenuItemDto(menuItem.getId(), menuItem.getName(), menuItem.getImageUrl())).toList();
   }
 
   public MenuItemDetailDto findById(UUID id) {
@@ -30,20 +30,20 @@ public class MenuItemService {
         () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Menu item not found"));
 
     MenuItemDetailDto menuItemDetailDto = new MenuItemDetailDto(
-        menuItem.getId().toString(),
+        menuItem.getId(),
         menuItem.getName(),
         menuItem.getDescription(),
         menuItem.getImageUrl(),
         menuItem.getMenuItemOptions().stream()
-            .map(menuItemOption -> new MenuItemDetailDto.MenuItemOption(menuItemOption.getId().toString(),
+            .map(menuItemOption -> new MenuItemDetailDto.MenuItemOption(menuItemOption.getId(),
                 menuItemOption.getSize(),
                 menuItemOption.getPrice()))
             .toList(),
         menuItem.getReviews().stream().map(
-            review -> new MenuItemDetailDto.Review(review.getId().toString(), review.getRating(), review.getComment(),
-                new MenuItemDetailDto.Review.User(review.getUser().getId().toString(), review.getUser().getFullName())))
+            review -> new MenuItemDetailDto.Review(review.getId(), review.getRating(), review.getComment(),
+                new MenuItemDetailDto.Review.User(review.getUser().getId(), review.getUser().getFullName())))
             .toList(),
-        new MenuItemDetailDto.Eatery(menuItem.getMenu().getId().toString(), menuItem.getMenu().getEatery().getName()));
+        new MenuItemDetailDto.Eatery(menuItem.getMenu().getId(), menuItem.getMenu().getEatery().getName()));
 
     return menuItemDetailDto;
   }

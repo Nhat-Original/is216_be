@@ -1,6 +1,7 @@
 package com.github.nhatoriginal.spring.dto.menuItem;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.github.nhatoriginal.spring.model.Size;
 
@@ -10,7 +11,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class MenuItemDetailDto {
-  private String id;
+  private UUID id;
   private String name;
   private String description;
   private String imageUrl;
@@ -21,14 +22,14 @@ public class MenuItemDetailDto {
   @Data
   @AllArgsConstructor
   public static class Eatery {
-    private String id;
+    private UUID id;
     private String name;
   }
 
   @Data
   @AllArgsConstructor
   public static class MenuItemOption {
-    private String id;
+    private UUID id;
     private Size size;
     private double price;
   }
@@ -36,7 +37,7 @@ public class MenuItemDetailDto {
   @Data
   @AllArgsConstructor
   public static class Review {
-    private String id;
+    private UUID id;
     private int rating;
     private String comment;
     private User user;
@@ -44,7 +45,7 @@ public class MenuItemDetailDto {
     @Data
     @AllArgsConstructor
     public static class User {
-      private String id;
+      private UUID id;
       private String fullName;
     }
   }
