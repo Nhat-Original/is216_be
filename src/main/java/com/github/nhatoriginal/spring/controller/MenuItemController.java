@@ -20,7 +20,7 @@ public class MenuItemController {
   private MenuItemService menuItemService;
 
   @GetMapping(Endpoint.MenuItem.GET_ALL)
-  public List<MenuItemDto> findAll(@RequestParam("name") String name) {
+  public List<MenuItemDto> findAll(@RequestParam(name = "name", required = false) String name) {
     return menuItemService.findAll(name);
   }
 
