@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -58,7 +59,7 @@ public class User {
   @Column(name = "phone", nullable = false)
   private String phone;
 
-  @ManyToMany
+  @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
   @JoinTable(name = "user_addresses", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "address_id"))
   private List<Address> addresses;
 
@@ -73,6 +74,5 @@ public class User {
 
   @OneToMany(mappedBy = "user")
   private List<Cart> carts;
-
 
 }

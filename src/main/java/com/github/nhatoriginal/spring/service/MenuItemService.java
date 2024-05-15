@@ -21,7 +21,7 @@ public class MenuItemService {
   public List<MenuItemDto> findAll(String name) {
     List<MenuItem> menuItems;
 
-    if (name.isEmpty()) {
+    if (name == null || name.isEmpty()) {
       menuItems = menuItemRepository.findAll();
     } else {
       menuItems = menuItemRepository.findByNameContaining(name);
