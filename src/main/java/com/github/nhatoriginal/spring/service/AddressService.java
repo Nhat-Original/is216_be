@@ -50,8 +50,11 @@ public class AddressService {
     return savedAddress;
   }
 
-  public Address delete(UUID id) {
-    return addressRepository.findById(id)
+  public void delete(UUID id) {
+    addressRepository.findById(id)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Address not found"));
+
+    userRepository.deleteUserAddressesByAddressId(id);
+    addressRepository.deleteById(id);
   }
 }
