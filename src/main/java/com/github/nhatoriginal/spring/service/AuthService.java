@@ -6,8 +6,10 @@ import com.github.nhatoriginal.spring.dto.auth.AuthResponseDto;
 import com.github.nhatoriginal.spring.model.Role;
 import com.github.nhatoriginal.spring.model.User;
 import com.github.nhatoriginal.spring.repository.UserRepository;
-
 import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.security.core.AuthenticationException;
+
 import org.springframework.security.authentication.AuthenticationManager;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,8 +55,11 @@ public class AuthService {
   }
 
   public AuthResponseDto login(AuthLoginDto authLoginDto) {
-    authenticationManager
-        .authenticate(new UsernamePasswordAuthenticationToken(authLoginDto.getEmail(), authLoginDto.getPassword()));
+    try {
+      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authLoginDto.getEmail(), authLoginDto.getPassword()));
+    } catch (AuthenticationException e) {
+      throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Authentication failed");
+    }
     var jwtToken = jwtService.generateToken(userService.loadUserByUsername(authLoginDto.getEmail()));
     return AuthResponseDto.builder().accessToken(jwtToken).build();
   }
