@@ -24,9 +24,10 @@ public final class Endpoint {
 
   public static final class Cart {
     public static final String BASE = "/cart";
-    public static final String GET_ALL = "/user/{id}";
+    public static final String GET_ALL = "/user/{userId}";
     public static final String CREATE = "";
-    public static final String DELETE = "/user/{id}";
+    public static final String DELETE = "/{userId}/{menuItemOptionId}";
+    public static final String UPDATE_QUANTITY = "/{userId}/{menuItemOptionId}";
   }
 
   public static final class Review {

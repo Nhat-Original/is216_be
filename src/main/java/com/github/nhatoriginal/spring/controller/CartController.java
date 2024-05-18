@@ -3,6 +3,7 @@ package com.github.nhatoriginal.spring.controller;
 import com.github.nhatoriginal.spring.constant.Endpoint;
 import com.github.nhatoriginal.spring.dto.cartList.CartItemDTO;
 import com.github.nhatoriginal.spring.dto.cartList.SaveCartItemDto;
+import com.github.nhatoriginal.spring.dto.cartList.UpdateCartItemQuantityDto;
 import com.github.nhatoriginal.spring.model.Cart;
 import com.github.nhatoriginal.spring.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class CartController {
   public CartService cartService;
 
   @GetMapping(Endpoint.Cart.GET_ALL)
-  public List<CartItemDTO> getCartItemList(@PathVariable UUID id) {
-    return cartService.getCartItemList(id);
+  public List<CartItemDTO> getCartItemList(@PathVariable UUID userId) {
+    return cartService.getCartItemList(userId);
   }
 
   @PostMapping(Endpoint.Cart.CREATE)
@@ -35,8 +36,17 @@ public class CartController {
     return new ResponseEntity<>("Saved cart item successfully", HttpStatus.CREATED);
   }
 
-  // @DeleteMapping(Endpoint.Cart.DELETE)
-  // public void deleteItemCart(@PathVariable UUID){
-  //
-  // }
+  @DeleteMapping(Endpoint.Cart.DELETE)
+  public ResponseEntity<String> delete(@PathVariable("userId") UUID userId,
+      @PathVariable("menuItemOptionId") UUID menuItemOptionId) {
+    cartService.delete(userId, menuItemOptionId);
+    return new ResponseEntity<>("Deleted cart item successfully", HttpStatus.OK);
+  }
+
+  @PatchMapping(Endpoint.Cart.UPDATE_QUANTITY)
+  public ResponseEntity<String> updateQuantity(@PathVariable("userId") UUID userId,
+      @PathVariable("menuItemOptionId") UUID menuItemOptionId, @RequestBody UpdateCartItemQuantityDto body) {
+    cartService.updateQuantity(userId, menuItemOptionId, body);
+    return new ResponseEntity<>("Updated cart item quantity successfully", HttpStatus.OK);
+  }
 }
