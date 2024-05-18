@@ -1,8 +1,10 @@
 package com.github.nhatoriginal.spring.service;
 
+import com.github.nhatoriginal.spring.config.CartIdClassConfig;
 import com.github.nhatoriginal.spring.dto.cartList.CartDTOConverter;
 import com.github.nhatoriginal.spring.dto.cartList.CartItemDTO;
 import com.github.nhatoriginal.spring.dto.cartList.SaveCartItemDto;
+import com.github.nhatoriginal.spring.dto.cartList.UpdateCartItemQuantityDto;
 import com.github.nhatoriginal.spring.model.Cart;
 import com.github.nhatoriginal.spring.model.MenuItemOption;
 import com.github.nhatoriginal.spring.model.User;
@@ -30,8 +32,8 @@ public class CartService {
   @Autowired
   private MenuItemOptionRepository menuItemOptionRepository;
 
-  public List<CartItemDTO> getCartItemList(UUID id) {
-    User user = userRepository.findById(id).get();
+  public List<CartItemDTO> getCartItemList(UUID userId) {
+    User user = userRepository.findById(userId).get();
     List<Cart> cartList = cartRepository.findByUser(user);
     List<CartItemDTO> cartItemDTOS = new ArrayList<CartItemDTO>();
     for (Cart cart : cartList) {
@@ -54,5 +56,37 @@ public class CartService {
     cart.setQuantity(saveCartItemDto.getQuantity());
 
     return cartRepository.save(cart);
+  }
+
+  public void delete(UUID userId, UUID menuItemOptionId) {
+    User user = userRepository.findById(userId)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
+    MenuItemOption menuItemOption = menuItemOptionRepository.findById(menuItemOptionId)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Menu item option not found"));
+
+    CartIdClassConfig id = new CartIdClassConfig();
+    id.setUser(user);
+    id.setMenuItemOption(menuItemOption);
+
+    cartRepository.deleteById(id);
+  }
+
+  public void updateQuantity(UUID userId, UUID menuItemOptionId, UpdateCartItemQuantityDto body) {
+    User user = userRepository.findById(userId)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
+    MenuItemOption menuItemOption = menuItemOptionRepository.findById(menuItemOptionId)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Menu item option not found"));
+
+    CartIdClassConfig id = new CartIdClassConfig();
+    id.setUser(user);
+    id.setMenuItemOption(menuItemOption);
+
+    Cart cart = cartRepository.findById(id)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cart item not found"));
+
+    cart.setQuantity(body.getQuantity());
+    cartRepository.save(cart);
   }
 }

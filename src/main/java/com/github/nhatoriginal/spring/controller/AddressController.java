@@ -37,12 +37,12 @@ public class AddressController {
   }
 
   @GetMapping(Endpoint.Address.GET_ALL)
-  public List<AddressDto> findByUserId(@PathVariable("userId") UUID userId) {
+  public List<AddressDto> findByUserId(@PathVariable UUID userId) {
     return addressService.findByUserId(userId);
   }
 
   @DeleteMapping(Endpoint.Address.DELETE)
-  public ResponseEntity<String> delete(@PathVariable("id") UUID id) {
+  public ResponseEntity<String> delete(@PathVariable UUID id) {
     addressService.delete(id);
     return ResponseEntity.ok("Deleted address successfully");
   }
