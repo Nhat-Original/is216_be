@@ -33,7 +33,7 @@ public class Eatery {
   private String phone;
 
   @Column(name = "is_alive", nullable = false)
-  private boolean isAlive;
+  private Boolean isAlive;
 
   @OneToOne
   @JoinColumn(name = "owner_id")

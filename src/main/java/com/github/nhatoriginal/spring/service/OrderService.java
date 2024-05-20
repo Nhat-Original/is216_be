@@ -22,7 +22,7 @@ public class OrderService {
 
   public List<OrderDto> findByUserId(UUID userId) {
     userRepository.findById(userId).orElseThrow(
-        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Người dùng không tồn tại"));
 
     return orderRepository.findByUserId(userId).stream().map(
         order -> new OrderDto(order.getId(), order.getOrderDate(), order.getTotalPrice(), order.getNote(),

@@ -8,7 +8,9 @@ public class CartDTOConverter {
   public CartItemDTO toCartItemDTO(Cart cart) {
     CartItemDTO cartItemDTO = new CartItemDTO();
     cartItemDTO.setMenuItemOptionId(cart.getMenuItemOption().getId());
-    cartItemDTO.setEateryId(cart.getMenuItemOption().getMenuItem().getMenu().getEatery().getId());
+    cartItemDTO.setEatery(
+        new CartItemDTO.Eatery(cart.getMenuItemOption().getMenuItem().getMenu().getEatery().getId(),
+            cart.getMenuItemOption().getMenuItem().getMenu().getEatery().getName()));
     cartItemDTO.setImageUrl(cart.getMenuItemOption().getMenuItem().getImageUrl());
     cartItemDTO.setName(cart.getMenuItemOption().getMenuItem().getName());
     cartItemDTO.setSize(cart.getMenuItemOption().getSize());
