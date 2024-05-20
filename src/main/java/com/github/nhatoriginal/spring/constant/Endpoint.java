@@ -24,7 +24,7 @@ public final class Endpoint {
 
   public static final class Cart {
     public static final String BASE = "/cart";
-    public static final String GET_ALL = "/user/{userId}";
+    public static final String GET_BY_USER_ID = "/user/{userId}";
     public static final String CREATE = "";
     public static final String DELETE = "/{userId}/{menuItemOptionId}";
     public static final String UPDATE_QUANTITY = "/{userId}/{menuItemOptionId}";
@@ -42,13 +42,13 @@ public final class Endpoint {
   public static final class Order {
     public static final String BASE = "/order";
     public static final String CREATE = "";
-    public static final String GET_ALL = "/user/{userId}";
+    public static final String GET_BY_USER_ID = "/user/{userId}";
     public static final String GET_ONE = "/{id}";
   }
 
   public static final class Address {
     public static final String BASE = "/address";
-    public static final String GET_ALL = "/user/{userId}";
+    public static final String GET_BY_USER_ID = "/user/{userId}";
     public static final String CREATE = "";
     public static final String GET_ONE = "/{id}";
     public static final String DELETE = "/{id}";

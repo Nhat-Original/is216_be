@@ -36,7 +36,7 @@ public class AddressController {
     return ResponseEntity.ok("Saved address successfully");
   }
 
-  @GetMapping(Endpoint.Address.GET_ALL)
+  @GetMapping(Endpoint.Address.GET_BY_USER_ID)
   public List<AddressDto> findByUserId(@PathVariable UUID userId) {
     return addressService.findByUserId(userId);
   }

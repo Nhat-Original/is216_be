@@ -20,7 +20,7 @@ public class CartController {
   @Autowired
   public CartService cartService;
 
-  @GetMapping(Endpoint.Cart.GET_ALL)
+  @GetMapping(Endpoint.Cart.GET_BY_USER_ID)
   public List<CartItemDTO> getCartItemList(@PathVariable UUID userId) {
     return cartService.getCartItemList(userId);
   }

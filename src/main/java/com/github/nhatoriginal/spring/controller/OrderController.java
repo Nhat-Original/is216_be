@@ -18,7 +18,7 @@ public class OrderController {
   @Autowired
   private OrderService orderService;
 
-  @GetMapping(Endpoint.Order.GET_ALL)
+  @GetMapping(Endpoint.Order.GET_BY_USER_ID)
   public List<OrderDto> findByUserId(@PathVariable UUID userId) {
     return orderService.findByUserId(userId);
   }
