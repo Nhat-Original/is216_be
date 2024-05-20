@@ -4,17 +4,26 @@ import java.util.UUID;
 
 import com.github.nhatoriginal.spring.model.Size;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CartItemDTO {
   private UUID menuItemOptionId;
-  private UUID eateryId;
   private String imageUrl;
   private String name;
   private Size size;
   private double price;
   private int quantity;
+  private Eatery eatery;
+
+  @Data
+  @AllArgsConstructor
+  public static class Eatery {
+    private UUID id;
+    private String name;
+  }
 }

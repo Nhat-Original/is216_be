@@ -3,11 +3,9 @@ package com.github.nhatoriginal.spring.service;
 import com.github.nhatoriginal.spring.model.User;
 import com.github.nhatoriginal.spring.repository.UserRepository;
 import com.github.nhatoriginal.spring.security.CustomUserDetails;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -15,7 +13,6 @@ import java.util.UUID;
 
 @Service
 public class UserService implements UserDetailsService {
-
   private final UserRepository userRepository;
 
   public UserService(UserRepository userRepository) {
@@ -26,7 +23,7 @@ public class UserService implements UserDetailsService {
   public UserDetails loadUserByUsername(String email) {
     User user = userRepository.findByEmail(email);
     if (user == null) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "email does not exists");
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email không tồn tại");
     }
     return new CustomUserDetails(user);
   }
@@ -36,7 +33,7 @@ public class UserService implements UserDetailsService {
   }
 
   public User getUserById(String id) {
-    return userRepository.findById(UUID.fromString(id)).orElse(null);
+    return userRepository.findById(UUID.fromString(id))
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Người dùng không tồn tại"));
   }
-
 }

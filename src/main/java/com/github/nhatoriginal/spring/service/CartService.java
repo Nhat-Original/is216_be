@@ -45,10 +45,17 @@ public class CartService {
 
   public Cart save(SaveCartItemDto saveCartItemDto) {
     User user = userRepository.findById(saveCartItemDto.getUserId())
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Người dùng không tồn tại"));
 
     MenuItemOption menuItemOption = menuItemOptionRepository.findById(saveCartItemDto.getMenuItemOptionId())
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Menu item option not found"));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tùy chọn món ăn không tồn tại"));
+
+    CartIdClassConfig id = new CartIdClassConfig();
+    id.setUser(user);
+    id.setMenuItemOption(menuItemOption);
+    if ((cartRepository.findById(id)).isPresent()) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tùy chọn món ăn đã tồn tại trong giỏ hàng");
+    }
 
     Cart cart = new Cart();
     cart.setUser(user);
@@ -60,10 +67,10 @@ public class CartService {
 
   public void delete(UUID userId, UUID menuItemOptionId) {
     User user = userRepository.findById(userId)
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Người dùng không tồn tại"));
 
     MenuItemOption menuItemOption = menuItemOptionRepository.findById(menuItemOptionId)
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Menu item option not found"));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tùy chọn món ăn không tồn tại"));
 
     CartIdClassConfig id = new CartIdClassConfig();
     id.setUser(user);
@@ -74,17 +81,18 @@ public class CartService {
 
   public void updateQuantity(UUID userId, UUID menuItemOptionId, UpdateCartItemQuantityDto body) {
     User user = userRepository.findById(userId)
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Người dùng không tồn tại"));
 
     MenuItemOption menuItemOption = menuItemOptionRepository.findById(menuItemOptionId)
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Menu item option not found"));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tùy chọn món ăn không tồn tại"));
 
     CartIdClassConfig id = new CartIdClassConfig();
     id.setUser(user);
     id.setMenuItemOption(menuItemOption);
 
     Cart cart = cartRepository.findById(id)
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cart item not found"));
+        .orElseThrow(
+            () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tùy chọn món ăn Không tồn tại trong giỏ hàng"));
 
     cart.setQuantity(body.getQuantity());
     cartRepository.save(cart);

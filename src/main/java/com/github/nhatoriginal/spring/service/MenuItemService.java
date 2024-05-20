@@ -33,7 +33,7 @@ public class MenuItemService {
 
   public MenuItemDetailDto findById(UUID id) {
     MenuItem menuItem = menuItemRepository.findById(id).orElseThrow(
-        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Menu item not found"));
+        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Món ăn không tồn tại"));
 
     MenuItemDetailDto menuItemDetailDto = new MenuItemDetailDto(
         menuItem.getId(),
@@ -49,7 +49,11 @@ public class MenuItemService {
             review -> new MenuItemDetailDto.Review(review.getId(), review.getRating(), review.getComment(),
                 new MenuItemDetailDto.Review.User(review.getUser().getId(), review.getUser().getFullName())))
             .toList(),
-        new MenuItemDetailDto.Eatery(menuItem.getMenu().getId(), menuItem.getMenu().getEatery().getName()));
+        new MenuItemDetailDto.Eatery(menuItem.getMenu().getId(), menuItem.getMenu().getEatery().getName(),
+            new MenuItemDetailDto.Eatery.Address(menuItem.getMenu().getEatery().getAddress().getProvince(),
+                menuItem.getMenu().getEatery().getAddress().getDistrict(),
+                menuItem.getMenu().getEatery().getAddress().getWard(),
+                menuItem.getMenu().getEatery().getAddress().getDetail())));
 
     return menuItemDetailDto;
   }
