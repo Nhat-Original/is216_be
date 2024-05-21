@@ -30,23 +30,23 @@ public class CartController {
     Cart cartItem = cartService.save(saveCartItemDto);
 
     if (cartItem == null) {
-      return new ResponseEntity<>("Failed to save cart item", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>("Thêm vào giỏ hàng thất bại", HttpStatus.BAD_REQUEST);
     }
 
-    return new ResponseEntity<>("Saved cart item successfully", HttpStatus.CREATED);
+    return new ResponseEntity<>("Thêm vào giỏ hàng thành công", HttpStatus.CREATED);
   }
 
   @DeleteMapping(Endpoint.Cart.DELETE)
   public ResponseEntity<String> delete(@PathVariable("userId") UUID userId,
       @PathVariable("menuItemOptionId") UUID menuItemOptionId) {
     cartService.delete(userId, menuItemOptionId);
-    return new ResponseEntity<>("Deleted cart item successfully", HttpStatus.OK);
+    return new ResponseEntity<>("Xóa từ giỏ hàng thất bại", HttpStatus.OK);
   }
 
   @PatchMapping(Endpoint.Cart.UPDATE_QUANTITY)
   public ResponseEntity<String> updateQuantity(@PathVariable("userId") UUID userId,
       @PathVariable("menuItemOptionId") UUID menuItemOptionId, @RequestBody UpdateCartItemQuantityDto body) {
     cartService.updateQuantity(userId, menuItemOptionId, body);
-    return new ResponseEntity<>("Updated cart item quantity successfully", HttpStatus.OK);
+    return new ResponseEntity<>("Xóa từ giỏ hàng thành công", HttpStatus.OK);
   }
 }

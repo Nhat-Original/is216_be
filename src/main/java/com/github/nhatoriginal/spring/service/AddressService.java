@@ -33,15 +33,15 @@ public class AddressService {
         .toList();
   }
 
-  public Address save(SaveAddressDto saveAddressDto) {
-    User user = userRepository.findById(saveAddressDto.getUserId())
+  public Address save(SaveAddressDto body) {
+    User user = userRepository.findById(body.getUserId())
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Người dùng không tồn tại"));
 
     Address address = new Address();
-    address.setDistrict(saveAddressDto.getDistrict());
-    address.setProvince(saveAddressDto.getProvince());
-    address.setWard(saveAddressDto.getWard());
-    address.setDetail(saveAddressDto.getDetail());
+    address.setDistrict(body.getDistrict());
+    address.setProvince(body.getProvince());
+    address.setWard(body.getWard());
+    address.setDetail(body.getDetail());
 
     Address savedAddress = addressRepository.save(address);
     user.getAddresses().add(savedAddress);
