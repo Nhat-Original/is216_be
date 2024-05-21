@@ -26,17 +26,17 @@ public class AddressController {
   private AddressService addressService;
 
   @PostMapping(Endpoint.Address.CREATE)
-  public ResponseEntity<String> save(@Validated @RequestBody SaveAddressDto saveAddressDto) {
-    Address address = addressService.save(saveAddressDto);
+  public ResponseEntity<String> save(@Validated @RequestBody SaveAddressDto body) {
+    Address address = addressService.save(body);
 
     if (address == null) {
-      return ResponseEntity.badRequest().body("Failed to save address");
+      return ResponseEntity.badRequest().body("Lưu địa chỉ thất bại");
     }
 
-    return ResponseEntity.ok("Saved address successfully");
+    return ResponseEntity.ok("Lưu địa chỉ thành công");
   }
 
-  @GetMapping(Endpoint.Address.GET_ALL)
+  @GetMapping(Endpoint.Address.GET_BY_USER_ID)
   public List<AddressDto> findByUserId(@PathVariable UUID userId) {
     return addressService.findByUserId(userId);
   }
@@ -44,6 +44,6 @@ public class AddressController {
   @DeleteMapping(Endpoint.Address.DELETE)
   public ResponseEntity<String> delete(@PathVariable UUID id) {
     addressService.delete(id);
-    return ResponseEntity.ok("Deleted address successfully");
+    return ResponseEntity.ok("Xóa địa chỉ thành công");
   }
 }
