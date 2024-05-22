@@ -25,6 +25,16 @@ public class MenuItemDetailDto {
   public static class Eatery {
     private UUID id;
     private String name;
+    private Address address;
+
+    @Data
+    @AllArgsConstructor
+    public static class Address {
+      private String province;
+      private String district;
+      private String ward;
+      private String detail;
+    }
   }
 
   @Data

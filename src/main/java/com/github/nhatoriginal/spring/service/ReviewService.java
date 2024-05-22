@@ -21,16 +21,16 @@ public class ReviewService {
   @Autowired
   private MenuItemRepository menuItemRepository;
 
-  public Review save(SaveReviewDto saveReviewDto) {
-    User user = userRepository.findById(saveReviewDto.getUserId())
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+  public Review save(SaveReviewDto body) {
+    User user = userRepository.findById(body.getUserId())
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Người dùng không tồn tại"));
 
-    MenuItem menuItem = menuItemRepository.findById(saveReviewDto.getMenuItemId())
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Menu item not found"));
+    MenuItem menuItem = menuItemRepository.findById(body.getMenuItemId())
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Món ăn không tồn tại"));
 
     Review review = new Review();
-    review.setRating(saveReviewDto.getRating());
-    review.setComment(saveReviewDto.getComment());
+    review.setRating(body.getRating());
+    review.setComment(body.getComment());
     review.setUser(user);
     review.setMenuItem(menuItem);
 

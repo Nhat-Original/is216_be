@@ -20,13 +20,13 @@ public class ReviewController {
   private ReviewService reviewService;
 
   @PostMapping(Endpoint.Review.CREATE)
-  public ResponseEntity<String> save(@Validated @RequestBody SaveReviewDto saveReviewDto) {
-    Review review = reviewService.save(saveReviewDto);
+  public ResponseEntity<String> save(@Validated @RequestBody SaveReviewDto body) {
+    Review review = reviewService.save(body);
 
     if (review == null) {
-      return new ResponseEntity<String>("Failed to save review", HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<String>("Lưu đánh giá thất bại", HttpStatus.BAD_REQUEST);
     }
 
-    return new ResponseEntity<String>("Review saved", HttpStatus.CREATED);
+    return new ResponseEntity<String>("Lưu đánh giá thành công", HttpStatus.CREATED);
   }
 }

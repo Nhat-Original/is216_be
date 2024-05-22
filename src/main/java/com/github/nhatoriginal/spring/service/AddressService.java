@@ -25,7 +25,7 @@ public class AddressService {
 
   public List<AddressDto> findByUserId(UUID userId) {
     userRepository.findById(userId).orElseThrow(
-        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Người dùng không tồn tại"));
 
     return addressRepository.findByUserId(userId).stream().map(
         address -> new AddressDto(address.getId(), address.getProvince(), address.getDistrict(), address.getWard(),
@@ -33,15 +33,15 @@ public class AddressService {
         .toList();
   }
 
-  public Address save(SaveAddressDto saveAddressDto) {
-    User user = userRepository.findById(saveAddressDto.getUserId())
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+  public Address save(SaveAddressDto body) {
+    User user = userRepository.findById(body.getUserId())
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Người dùng không tồn tại"));
 
     Address address = new Address();
-    address.setDistrict(saveAddressDto.getDistrict());
-    address.setProvince(saveAddressDto.getProvince());
-    address.setWard(saveAddressDto.getWard());
-    address.setDetail(saveAddressDto.getDetail());
+    address.setDistrict(body.getDistrict());
+    address.setProvince(body.getProvince());
+    address.setWard(body.getWard());
+    address.setDetail(body.getDetail());
 
     Address savedAddress = addressRepository.save(address);
     user.getAddresses().add(savedAddress);
@@ -50,8 +50,11 @@ public class AddressService {
     return savedAddress;
   }
 
-  public Address delete(UUID id) {
-    return addressRepository.findById(id)
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Address not found"));
+  public void delete(UUID id) {
+    addressRepository.findById(id)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Địa chỉ không tồn tại"));
+
+    userRepository.deleteUserAddressesByAddressId(id);
+    addressRepository.deleteById(id);
   }
 }

@@ -18,7 +18,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 @Table(name = "users")
 @JsonIgnoreProperties({ "hashedPassword" })
 public class User {

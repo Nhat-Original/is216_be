@@ -1,14 +1,29 @@
 package com.github.nhatoriginal.spring.dto.cartList;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.UUID;
 
-@Getter
-@Setter
+import com.github.nhatoriginal.spring.model.Size;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CartItemDTO {
+  private UUID menuItemOptionId;
   private String imageUrl;
   private String name;
+  private Size size;
   private double price;
   private int quantity;
+  private Eatery eatery;
+
+  @Data
+  @AllArgsConstructor
+  public static class Eatery {
+    private UUID id;
+    private String name;
+  }
 }

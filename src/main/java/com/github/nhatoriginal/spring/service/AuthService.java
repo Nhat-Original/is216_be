@@ -15,7 +15,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class AuthService {
@@ -38,7 +37,7 @@ public class AuthService {
   public String register(AuthRegisterDto authRegisterDto) {
     System.out.println(authRegisterDto);
     if (userRepository.findByEmail(authRegisterDto.getEmail()) != null) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email đã tồn tại");
     }
 
     User user = User.builder()
@@ -56,9 +55,10 @@ public class AuthService {
 
   public AuthResponseDto login(AuthLoginDto authLoginDto) {
     try {
-      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authLoginDto.getEmail(), authLoginDto.getPassword()));
+      authenticationManager
+          .authenticate(new UsernamePasswordAuthenticationToken(authLoginDto.getEmail(), authLoginDto.getPassword()));
     } catch (AuthenticationException e) {
-      throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Authentication failed");
+      throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Xác thực thất bại");
     }
     var jwtToken = jwtService.generateToken(userService.loadUserByUsername(authLoginDto.getEmail()));
     return AuthResponseDto.builder().accessToken(jwtToken).build();

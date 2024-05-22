@@ -6,8 +6,6 @@ import com.github.nhatoriginal.spring.dto.auth.AuthRegisterDto;
 import com.github.nhatoriginal.spring.dto.auth.AuthResponseDto;
 import com.github.nhatoriginal.spring.service.AuthService;
 
-import jakarta.validation.Valid;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
