@@ -3,6 +3,7 @@ package com.github.nhatoriginal.spring.model;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,13 +34,13 @@ public class MenuItem {
 
   @Column(name = "image_url", nullable = false)
   private String imageUrl;
-
+  @JsonManagedReference
   @OneToMany(mappedBy = "menuItem")
   private List<MenuItemOption> menuItemOptions;
 
   @OneToMany(mappedBy = "menuItem")
   private List<Review> reviews;
-
+  @JsonManagedReference
   @ManyToOne
   @JoinColumn(name = "menu_id", nullable = false)
   private Menu menu;

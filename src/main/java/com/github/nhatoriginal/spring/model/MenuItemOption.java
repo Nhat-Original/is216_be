@@ -3,6 +3,7 @@ package com.github.nhatoriginal.spring.model;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +30,7 @@ public class MenuItemOption {
 
   @OneToMany(mappedBy = "menuItemOption", fetch = FetchType.LAZY)
   private List<Cart> carts;
-
+  @JsonBackReference
   @ManyToOne
   @JoinColumn(name = "menu_item_id", nullable = false)
   private MenuItem menuItem;

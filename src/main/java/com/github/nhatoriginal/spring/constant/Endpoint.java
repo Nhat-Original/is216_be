@@ -13,6 +13,7 @@ public final class Endpoint {
   public static final class MenuItem {
     public static final String BASE = "/menu-item";
     public static final String GET_ALL = "";
+    public static final String GET_ALL_BY_MENU_ID = "/menu/{menuId}";
     public static final String GET_ONE = "/{id}";
     public static final String CREATE = "";
     public static final String UPDATE = "/{id}";

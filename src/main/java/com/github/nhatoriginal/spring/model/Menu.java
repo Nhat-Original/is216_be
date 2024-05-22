@@ -3,16 +3,9 @@ package com.github.nhatoriginal.spring.model;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,7 +23,7 @@ public class Menu {
   @OneToOne
   @JoinColumn(name = "eatery_id", nullable = false)
   private Eatery eatery;
-
-  @OneToMany(mappedBy = "menu")
+  @JsonBackReference
+  @OneToMany(mappedBy = "menu", fetch = FetchType.EAGER)
   private List<MenuItem> menuItems;
 }
