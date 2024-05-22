@@ -4,20 +4,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
@@ -28,6 +19,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Table(name = "users")
+@JsonIgnoreProperties({ "hashedPassword" })
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -37,7 +29,6 @@ public class User {
   @Email
   @Column(name = "email", nullable = false, unique = true)
   private String email;
-
   @Column(name = "hashed_password", nullable = false)
   private String hashedPassword;
 
@@ -62,16 +53,16 @@ public class User {
   @JoinTable(name = "user_addresses", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "address_id"))
   private List<Address> addresses;
 
-  @OneToOne(mappedBy = "owner")
-  private Eatery eatery;
-
+  @OneToMany(mappedBy = "owner")
+  @JsonIncludeProperties({"id", "name", "phone",  "isAlive" })
+  private List<Eatery> eateries;
   @OneToMany(mappedBy = "user")
   private List<Order> orders;
-
+  @JsonIncludeProperties({"id", "rating", "comment" })
   @OneToMany(mappedBy = "user")
   private List<Review> reviews;
-
   @OneToMany(mappedBy = "user")
+  @JsonIgnoreProperties({ "user" })
   private List<Cart> carts;
 
 }

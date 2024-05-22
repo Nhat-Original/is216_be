@@ -11,4 +11,5 @@ public class MenuItemDto {
   private UUID id;
   private String name;
   private String imageUrl;
+
 }
