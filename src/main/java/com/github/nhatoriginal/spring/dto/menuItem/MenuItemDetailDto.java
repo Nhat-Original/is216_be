@@ -18,6 +18,7 @@ public class MenuItemDetailDto {
   private List<MenuItemOption> menuItemOptions;
   private List<Review> reviews;
   private Eatery eatery;
+  private String menu_id;
 
   @Data
   @AllArgsConstructor

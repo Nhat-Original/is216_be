@@ -14,6 +14,17 @@ public final class Endpoint {
     public static final String BASE = "/menu-item";
     public static final String GET_ALL = "";
     public static final String GET_ONE = "/{id}";
+    public static final String CREATE = "";
+    public static final String UPDATE = "/{id}";
+    public static final String DELETE = "/{id}";
+
+  }
+  public  static final class Menu {
+    public static final String BASE = "/menu";
+    public static final String GET_ALL = "";
+    public static final String GET_ONE = "/{id}";
+    public static final String CREATE = "";
+    public static final String DELETE = "/{id}";
   }
 
   public static final class User {
@@ -21,7 +32,14 @@ public final class Endpoint {
     public static final String GET_ALL = "";
     public static final String GET_ONE = "/{id}";
   }
+  public static final class Eatery {
+    public static final String BASE = "/eatery";
+    public static final String GET_ONE = "/{id}";
+    public static final String CREATE = "";
+    public static final String DELETE = "/{id}";
 
+
+  }
   public static final class Cart {
     public static final String BASE = "/cart";
     public static final String GET_ALL = "/user/{id}";

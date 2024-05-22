@@ -3,6 +3,7 @@ package com.github.nhatoriginal.spring.model;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +20,7 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "menus")
+@JsonIgnoreProperties({"eatery"})
 public class Menu {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)

@@ -3,6 +3,7 @@ package com.github.nhatoriginal.spring.model;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,19 +34,22 @@ public class Eatery {
   private String phone;
 
   @Column(name = "is_alive", nullable = false)
-  private boolean isAlive;
+  private Boolean isAlive;
 
-  @OneToOne
-  @JoinColumn(name = "owner_id")
+  @ManyToOne()
+  @JoinColumn(name = "owner_id", nullable = false)
   private User owner;
 
   @OneToOne(mappedBy = "eatery")
+  @JsonIgnoreProperties({ "eatery" })
   private Menu menu;
 
   @OneToMany(mappedBy = "eatery")
+  @JsonIgnoreProperties({ "eatery" })
   private List<Order> orders;
 
   @ManyToOne
+  @JsonIgnoreProperties({ "eateries" })
   @JoinColumn(name = "address_id", nullable = false)
   private Address address;
 }
