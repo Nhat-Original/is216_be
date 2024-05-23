@@ -69,30 +69,32 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             String authHeader = request.getHeader("Authorization");
             if (StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
-                filterChain.doFilter(request, response);
-                return;
-            }
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write("Unauthorized");
+            } else {
+                String jwt = authHeader.substring(7);
+                String userEmail = jwtService.extractUsername(jwt);
 
-            String jwt = authHeader.substring(7);
-            String userEmail = jwtService.extractUsername(jwt);
+                if (StringUtils.isNotEmpty(userEmail) && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    UserDetails userDetails = userService.loadUserByUsername(userEmail);
 
-            if (StringUtils.isNotEmpty(userEmail) && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = userService.loadUserByUsername(userEmail);
-
-                if (jwtService.isTokenValid(jwt, userDetails)) {
-                    setAuthenticationContext(userDetails, request);
+                    if (jwtService.isTokenValid(jwt, userDetails)) {
+                        setAuthenticationContext(userDetails, request);
+                        filterChain.doFilter(request, response);
+                    } else {
+                        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                        response.getWriter().write("Unauthorized");
+                    }
+                } else {
+                    filterChain.doFilter(request, response);
                 }
             }
         } catch (Exception e) {
             logger.error("Failed to process JWT authentication", e);
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Unauthorized");
-            return;
         }
-
-        filterChain.doFilter(request, response);
     }
-
     private void setupCorsHeaders(HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", allowedOrigins);
         response.addHeader("Access-Control-Allow-Methods", allowedMethods);
