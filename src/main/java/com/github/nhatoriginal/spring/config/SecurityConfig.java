@@ -53,14 +53,15 @@ public class SecurityConfig {
         .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
         .authenticationProvider(authenticationProvider)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-        .logout(logout -> logout.logoutUrl("/api/v1/auth/logout")).build();
+        .build();
   }
 
+  //Dùng Bean để tạo ra một PasswordEncoder để mã hóa mật khẩu bằng BCryptPasswordEncoder
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
-
+  //Dùng Bean để tạo ra một Customizer<CorsConfigurer<HttpSecurity>> để cấu hình CORS
   @Bean
   public Customizer<CorsConfigurer<HttpSecurity>> corsConfigurationSource() {
     return cors -> {
