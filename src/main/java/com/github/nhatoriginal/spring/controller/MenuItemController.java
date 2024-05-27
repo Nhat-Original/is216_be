@@ -32,27 +32,18 @@ public class MenuItemController {
   public ResponseEntity<MenuItemDetailDto> create(@RequestBody MenuItemDetailDto menuItemDto) {
     MenuItemDetailDto createdMenuItem = menuItemService.create(menuItemDto);
     URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-            .path("/{id}")
-            .buildAndExpand(createdMenuItem.getId())
-            .toUri();
+        .path("/{id}")
+        .buildAndExpand(createdMenuItem.getId())
+        .toUri();
     return ResponseEntity.created(location).body(createdMenuItem);
   }
+
   @PreAuthorize("hasAuthority('ROLE_OWNER')")
   @GetMapping(Endpoint.MenuItem.GET_ALL_BY_MENU_ID)
   public ResponseEntity<List<MenuItemDetailDto>> findAllByMenuId(@PathVariable UUID menuId) {
     return ResponseEntity.ok(menuItemService.findAllByMenuId(menuId));
   }
-  @PreAuthorize("hasAuthority('ROLE_OWNER')")
-  @PostMapping(Endpoint.MenuItem.CREATE)
-  public MenuItemDetailDto create(@RequestBody MenuItemDetailDto menuItemDto) {
 
-    return menuItemService.create(menuItemDto);
-  }
-
-  @GetMapping(Endpoint.MenuItem.GET_ALL_BY_MENU_ID)
-  public List<MenuItemDetailDto> findAllByMenuId(@PathVariable UUID menuId) {
-    return menuItemService.findAllByMenuId(menuId);
-  }
   @PreAuthorize("hasAuthority('ROLE_OWNER')")
   @PatchMapping(Endpoint.MenuItem.UPDATE)
   public MenuItemDetailDto update(@PathVariable UUID id, @RequestBody MenuItemDetailDto menuItemDto) {
@@ -64,6 +55,7 @@ public class MenuItemController {
   public ResponseEntity<String> delete(@PathVariable UUID id) {
     return ResponseEntity.ok(menuItemService.delete(id));
   }
+
   @GetMapping(Endpoint.MenuItem.GET_ONE)
   public MenuItemDetailDto findById(@PathVariable UUID id) {
     return menuItemService.findById(id);
