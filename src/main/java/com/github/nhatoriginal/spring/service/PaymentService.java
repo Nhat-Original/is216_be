@@ -16,14 +16,18 @@ import java.util.UUID;
 
 @Service
 public class PaymentService {
-  @Autowired
-  private CartUserRepository cartRepository;
+  private final CartUserRepository cartRepository;
 
-  @Autowired
-  private PaymentDTOConverter paymentDTOConverter;
 
-  @Autowired
-  private UserRepository userRepository;
+  private final PaymentDTOConverter paymentDTOConverter;
+
+
+  private final UserRepository userRepository;
+  public PaymentService(CartUserRepository cartRepository, PaymentDTOConverter paymentDTOConverter, UserRepository userRepository) {
+    this.cartRepository = cartRepository;
+    this.paymentDTOConverter = paymentDTOConverter;
+    this.userRepository = userRepository;
+  }
 
   public List<PaymentDTO> getPaymentFromCartList(UUID id) {
     User user = userRepository.findById(id).get();

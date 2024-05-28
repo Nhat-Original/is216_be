@@ -33,9 +33,9 @@ public class MenuItemService {
     List<MenuItem> menuItems;
 
     if (name == null || name.isEmpty()) {
-      menuItems = menuItemRepository.findAll();
+      menuItems = menuItemRepository.findAllWithIsDeleteFalse();
     } else {
-      menuItems = menuItemRepository.findByNameContaining(name);
+      menuItems = menuItemRepository.findByNameContainingAndIsDeleteFalse(name);
     }
 
     return menuItems.stream().map(
@@ -43,18 +43,20 @@ public class MenuItemService {
   }
 
   public MenuItemDetailDto findById(UUID id) {
-    MenuItem menuItem = menuItemRepository.findById(id).orElseThrow(
+    MenuItem menuItem = menuItemRepository.findByIdAndIsDeleteFalse(id).orElseThrow(
             () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Món ăn không tồn tại"));
 
     return createMenuItemDetailDto(menuItem);
   }
+    public List<MenuItemDetailDto> findAllByMenuId(UUID menuId) {
+        return findAllByMenuId(menuId, "");
+    }
 
-  public List<MenuItemDetailDto> findAllByMenuId(UUID menuId) {
-    List<MenuItem> menuItems = menuItemRepository.findAllByMenuId(menuId);
+    public List<MenuItemDetailDto> findAllByMenuId(UUID menuId, String name) {
+        List<MenuItem> menuItems = menuItemRepository.findAllByMenuIdAndNameContainingAndIsDeleteFalse(menuId, name);
 
-    return menuItems.stream().map(this::createMenuItemDetailDto).collect(Collectors.toList());
-  }
-
+        return menuItems.stream().map(this::createMenuItemDetailDto).collect(Collectors.toList());
+    }
   private MenuItemDetailDto createMenuItemDetailDto(MenuItem menuItem) {
     return new MenuItemDetailDto(
             menuItem.getId(),
@@ -98,8 +100,7 @@ public class MenuItemService {
     MenuItem menuItem = menuItemRepository.findById(id).orElseThrow(
             () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Món ăn không tồn tại"));
     List<MenuItemOption> menuItems = menuItemOptionRepository.findAllByMenuItemId(id);
-    menuItemOptionRepository.deleteAll(menuItems);
-    menuItemRepository.delete(menuItem);
+    menuItemRepository.updateIsDelete(id, true);
     return "Xóa thành công";
 
   }

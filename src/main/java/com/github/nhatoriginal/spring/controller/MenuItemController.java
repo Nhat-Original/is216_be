@@ -36,10 +36,10 @@ public class MenuItemController {
   }
   @PreAuthorize("hasAuthority('ROLE_OWNER')")
   @GetMapping(Endpoint.MenuItem.GET_ALL_BY_MENU_ID)
-  public ResponseEntity<List<MenuItemDetailDto>> findAllByMenuId(@PathVariable UUID menuId) {
-    return ResponseEntity.ok(menuItemService.findAllByMenuId(menuId));
+  public ResponseEntity<List<MenuItemDetailDto>> findAllByMenuId(@PathVariable UUID menuId, @RequestParam(defaultValue = "") String name) {
+      return ResponseEntity.ok(menuItemService.findAllByMenuId(menuId, name));
   }
-    @PreAuthorize("hasAuthority('ROLE_OWNER')")
+  @PreAuthorize("hasAuthority('ROLE_OWNER')")
   @PatchMapping(Endpoint.MenuItem.UPDATE)
   public MenuItemDetailDto update(@PathVariable UUID id, @RequestBody MenuItemDetailDto menuItemDto) {
     return menuItemService.update(id, menuItemDto);
@@ -53,8 +53,4 @@ public class MenuItemController {
   public MenuItemDetailDto findById(@PathVariable UUID id) {
     return menuItemService.findById(id);
   }
-//  @GetMapping("")
-//  public  List<MenuItemDto> findAllByOwner() {
-//    return menuItemService.findAll(null);
-//  }
 }

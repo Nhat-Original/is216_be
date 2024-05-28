@@ -29,7 +29,7 @@ public class MenuItem {
   @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "description", nullable = true)
+  @Column(name = "description")
   private String description;
 
   @Column(name = "image_url", nullable = false)
@@ -37,7 +37,8 @@ public class MenuItem {
   @JsonManagedReference
   @OneToMany(mappedBy = "menuItem")
   private List<MenuItemOption> menuItemOptions;
-
+  @Column(name="is_delete", nullable = false)
+  private boolean isDelete = false;
   @OneToMany(mappedBy = "menuItem")
   private List<Review> reviews;
   @JsonManagedReference
