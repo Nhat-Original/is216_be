@@ -14,13 +14,17 @@ import org.springframework.http.HttpStatus;
 
 @Service
 public class ReviewService {
-  @Autowired
-  private ReviewRepository reviewRepository;
-  @Autowired
-  private UserRepository userRepository;
-  @Autowired
-  private MenuItemRepository menuItemRepository;
 
+  private final ReviewRepository reviewRepository;
+
+  private final UserRepository userRepository;
+
+  private final MenuItemRepository menuItemRepository;
+  public ReviewService(ReviewRepository reviewRepository, UserRepository userRepository, MenuItemRepository menuItemRepository) {
+    this.reviewRepository = reviewRepository;
+    this.userRepository = userRepository;
+    this.menuItemRepository = menuItemRepository;
+  }
   public Review save(SaveReviewDto body) {
     User user = userRepository.findById(body.getUserId())
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Người dùng không tồn tại"));

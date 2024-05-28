@@ -20,20 +20,19 @@ import java.util.*;
 
 @Service
 public class CartService {
-  @Autowired
-  private CartUserRepository cartRepository;
 
-  @Autowired
-  private CartDTOConverter cartDTOConverter;
-
-  @Autowired
-  private UserRepository userRepository;
-
-  @Autowired
-  private MenuItemOptionRepository menuItemOptionRepository;
-
+  private final CartUserRepository cartRepository;
+  private final CartDTOConverter cartDTOConverter;
+  private final UserRepository userRepository;
+  private final MenuItemOptionRepository menuItemOptionRepository;
+ public  CartService(CartUserRepository cartRepository, CartDTOConverter cartDTOConverter, UserRepository userRepository, MenuItemOptionRepository menuItemOptionRepository) {
+    this.cartRepository = cartRepository;
+    this.cartDTOConverter = cartDTOConverter;
+    this.userRepository = userRepository;
+    this.menuItemOptionRepository = menuItemOptionRepository;
+  }
   public List<CartItemDTO> getCartItemList(UUID userId) {
-    User user = userRepository.findById(userId).get();
+    User user = userRepository.findById(userId).isPresent() ? userRepository.findById(userId).get() : null;
     List<Cart> cartList = cartRepository.findByUser(user);
     List<CartItemDTO> cartItemDTOS = new ArrayList<CartItemDTO>();
     for (Cart cart : cartList) {

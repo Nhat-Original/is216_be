@@ -29,20 +29,28 @@ import org.springframework.http.HttpStatus;
 
 @Service
 public class OrderService {
-  @Autowired
-  private OrderRepository orderRepository;
-  @Autowired
-  private OrderDetailRepository orderDetailRepository;
-  @Autowired
-  private UserRepository userRepository;
-  @Autowired
-  private AddressRepository addressRepository;
-  @Autowired
-  private EateryRepository eateryRepository;
-  @Autowired
-  private ShipperRepository shipperRepository;
-  @Autowired
-  private MenuItemOptionRepository menuItemOptionRepository;
+  private final OrderRepository orderRepository;
+
+  private final OrderDetailRepository orderDetailRepository;
+
+  private final UserRepository userRepository;
+
+  private final AddressRepository addressRepository;
+
+  private final EateryRepository eateryRepository;
+
+  private final ShipperRepository shipperRepository;
+
+  private final MenuItemOptionRepository menuItemOptionRepository;
+  public OrderService(OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, UserRepository userRepository, AddressRepository addressRepository, EateryRepository eateryRepository, ShipperRepository shipperRepository, MenuItemOptionRepository menuItemOptionRepository) {
+    this.orderRepository = orderRepository;
+    this.orderDetailRepository = orderDetailRepository;
+    this.userRepository = userRepository;
+    this.addressRepository = addressRepository;
+    this.eateryRepository = eateryRepository;
+    this.shipperRepository = shipperRepository;
+    this.menuItemOptionRepository = menuItemOptionRepository;
+  }
 
   public List<OrderDto> findByUserId(UUID userId) {
     userRepository.findById(userId).orElseThrow(

@@ -65,7 +65,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-
+        if (isPublicEndpoint(request)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         try {
             String authHeader = request.getHeader("Authorization");
             if (StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
@@ -110,7 +113,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private boolean isAuthEndpoint(HttpServletRequest request) {
         return request.getRequestURI().contains("/api/v1/auth");
     }
-
+    private  boolean isPublicEndpoint(HttpServletRequest request) {
+        return Objects.equals(request.getRequestURI(), "/api/v1/menu-item") && request.getMethod().equals("GET");
+    }
     private void setAuthenticationContext(UserDetails userDetails, HttpServletRequest request) {
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(

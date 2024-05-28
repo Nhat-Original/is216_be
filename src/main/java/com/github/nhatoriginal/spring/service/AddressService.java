@@ -17,12 +17,14 @@ import com.github.nhatoriginal.spring.repository.UserRepository;
 
 @Service
 public class AddressService {
-  @Autowired
-  private AddressRepository addressRepository;
 
-  @Autowired
-  private UserRepository userRepository;
+  private final AddressRepository addressRepository;
+  private final UserRepository userRepository;
 
+  public AddressService(AddressRepository addressRepository, UserRepository userRepository) {
+    this.addressRepository = addressRepository;
+    this.userRepository = userRepository;
+  }
   public List<AddressDto> findByUserId(UUID userId) {
     userRepository.findById(userId).orElseThrow(
         () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Người dùng không tồn tại"));
