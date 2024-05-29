@@ -18,6 +18,9 @@ public class EateryService {
 
         return eateryRepository.findById(id).orElse(null);
     }
+    public List<Eatery> findAllByOwnerId(UUID ownerId) {
+        return eateryRepository.findAllByOwnerId(ownerId);
+    }
     public Eatery save(Eatery eatery) {
         return eateryRepository.save(eatery);
     }

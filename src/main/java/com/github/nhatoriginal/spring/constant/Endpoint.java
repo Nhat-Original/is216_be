@@ -35,6 +35,7 @@ public final class Endpoint {
   }
   public static final class Eatery {
     public static final String BASE = "/eatery";
+    public static final String GET_ALL_ByOwnerId = "/owner/{ownerId}";
     public static final String GET_ONE = "/{id}";
     public static final String CREATE = "";
     public static final String DELETE = "/{id}";
