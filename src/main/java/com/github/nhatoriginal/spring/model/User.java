@@ -19,7 +19,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Table(name = "users")
-@JsonIgnoreProperties({ "hashedPassword" })
+@JsonIgnoreProperties({ "hashedPassword", "carts", "orders", "reviews", "eateries", "addresses"})
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
